@@ -1,4 +1,5 @@
 #include "plateau.hpp"
+#include <iostream>
 
 void Case::set_etat(Etat nouvel_etat) {
     etat = nouvel_etat;
@@ -50,6 +51,25 @@ void plateau::reset() {
     }
 }
 void plateau::afficher() {
- // je sais pas encore comment je vais faire ça
+
+    for (int i = 0; i < largeur; ++i) {
+        for (int j = 0; j < largeur; ++j) {
+            Etat etat = cases[i][j].get_etat();
+            char symbole;
+            switch (etat) {
+                case Etat::VIDE:
+                    symbole = '.';
+                    break;
+                case Etat::CROIX:
+                    symbole = 'X';
+                    break;
+                case Etat::ROND:
+                    symbole = 'O';
+                    break;
+            }
+            std::cout << symbole << " ";
+        }
+        std::cout << std::endl;
+    }
 }
 
