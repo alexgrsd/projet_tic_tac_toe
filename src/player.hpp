@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 namespace player
 {
@@ -7,11 +8,15 @@ namespace player
     {
     private:
         char symbol;
-        const char *name;
+        std::string name;
+        bool is_human;
     public:
-        Player(char symbol, const char *name);
+        Player(char symbol, const std::string &name, bool is_human);
         char get_symbol() const;
-        const char *get_name() const;
+        const std::string &get_name() const;
+        bool get_is_human() const;
     };
 
-};
+    Player create_bot();
+
+} // namespace player
