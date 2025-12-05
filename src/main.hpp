@@ -1,4 +1,6 @@
 #pragma once
+#include "player.hpp"
+#include "plateau.hpp"
 #include <string>
 
 std::string game_name_ascii = R"(
@@ -10,4 +12,7 @@ std::string game_name_ascii = R"(
   \/_/   \/_/  \/_/   \/_/\/_/   \/_____/     \/_/   \/_____/   \/_____/
 
 )";
+
+int jouer_tour(Player player, Board &board);
+
 

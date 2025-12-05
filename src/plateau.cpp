@@ -1,71 +1,93 @@
 #include "plateau.hpp"
 #include <iostream>
 
-void Case::set_etat(Etat nouvel_etat) {
-    etat = nouvel_etat;
-}
-Etat Case::get_etat() {
-    return etat;
+void Case::print_state() { // print l'etat de la case
+    if (state == "") {
+        std::cout << ".";
+    } else {
+        std::cout << state;
+    }
 }
 
-Etat plateau::verifier_victoire() {
-    Etat c[3][3];
-    for (int i = 0; i < 3; ++i)
-        for (int j = 0; j < 3; ++j)
-            c[i][j] = cases[i][j].get_etat();
 
+int Board::verify_victory_tic_tac_toe() { // un peu hideux mais fait le taff jusqu'ici
     // Vérification des lignes
-    for (int i = 0; i < 3; ++i)
-        if (c[i][0] != Etat::VIDE && c[i][0] == c[i][1] && c[i][1] == c[i][2])
-            return c[i][0];
+    for (int i = 0; i < largeur; ++i) {
+        if (cases[i][0].get_state() != "" &&
+            cases[i][0].get_state() == cases[i][1].get_state() &&
+            cases[i][1].get_state() == cases[i][2].get_state()) {
+            return (cases[i][0].get_state() == "X") ? 1 : 2;
+        }
+    }
 
     // Vérification des colonnes
-    for (int j = 0; j < 3; ++j)
-        if (c[0][j] != Etat::VIDE && c[0][j] == c[1][j] && c[1][j] == c[2][j])
-            return c[0][j];
+    for (int j = 0; j < largeur; ++j) {
+        if (cases[0][j].get_state() != "" &&
+            cases[0][j].get_state() == cases[1][j].get_state() &&
+            cases[1][j].get_state() == cases[2][j].get_state()) {
+            return (cases[0][j].get_state() == "X") ? 1 : 2;
+        }
+    }
 
     // Vérification des diagonales
-    if (c[0][0] != Etat::VIDE && c[0][0] == c[1][1] && c[1][1] == c[2][2])
-        return c[0][0];
-
-    if (c[0][2] != Etat::VIDE && c[0][2] == c[1][1] && c[1][1] == c[2][0])
-        return c[0][2];
-
-    return Etat::VIDE;
-}
-
-void plateau::activer_case(int x, int y, Etat etat) {
-    if (plateau::cases[x][y].get_etat() != Etat::VIDE) {
-        return; // Case déjà occupée
-        
+    if (cases[0][0].get_state() != "" &&
+        cases[0][0].get_state() == cases[1][1].get_state() &&
+        cases[1][1].get_state() == cases[2][2].get_state()) {
+        return (cases[0][0].get_state() == "X") ? 1 : 2;
     }
-    if (x >= 0 && x < largeur && y >= 0 && y < largeur) {
-        cases[x][y].set_etat(etat);
+    if (cases[0][2].get_state() != "" &&
+        cases[0][2].get_state() == cases[1][1].get_state() &&
+        cases[1][1].get_state() == cases[2][0].get_state()) {
+        return (cases[0][2].get_state() == "X") ? 1 : 2;
     }
-}
-void plateau::reset() {
+
+    // verifie si le plateau est plein
+    bool is_full = true;
     for (int i = 0; i < largeur; ++i) {
         for (int j = 0; j < largeur; ++j) {
-            cases[i][j].set_etat(Etat::VIDE);
+            if (cases[i][j].get_state() == "") {
+                is_full = false;
+                break;;
+            }
+        }
+        if (!is_full) {
+            break;
+        }
+    }
+    if (is_full) {
+        return 3; // Match nul
+    }
+
+    return 0; // Pas de gagnant
+    
+}
+
+int Board::activate_case(int x,int y,std::string state) {
+    if (!Board::cases[x][y].is_empty()) {
+        std ::cout << "Case occupée: ";
+        cases[x][y].print_state();
+        std::cout << std::endl;
+        return 1; // Case déjà occupée
+    }
+    if (x >= 0 && x < largeur && y >= 0 && y < largeur) {
+        cases[x][y].set_state(state);
+    }
+    else return 2; // Coordonnées invalides
+    return 0; // Succès
+}
+void Board::reset() {
+    for (int i = 0; i < largeur; ++i) {
+        for (int j = 0; j < largeur; ++j) {
+            cases[i][j].set_state("");
         }
     }
 }
-void plateau::afficher() {
-
+void Board::print_board() {
     for (int i = 0; i < largeur; ++i) {
         for (int j = 0; j < largeur; ++j) {
-            Etat etat = cases[i][j].get_etat();
-            char symbole;
-            switch (etat) {
-                case Etat::VIDE:
-                    symbole = '.';
-                    break;
-                case Etat::CROIX:
-                    symbole = 'X';
-                    break;
-                case Etat::ROND:
-                    symbole = 'O';
-                    break;
+            std::string symbole = cases[i][j].get_state();
+            if (symbole == "") {
+                symbole = ".";
             }
             std::cout << symbole << " ";
         }
