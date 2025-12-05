@@ -1,16 +1,17 @@
 #pragma once
-#include <string>
 
-struct Player{
+namespace player
+{
+
+    struct Player
+    {
     private:
-    std::string name;
-    std::string symbol;
-
+        char symbol;
+        const char *name;
     public:
-    std::string get_name() const;
-    std::string get_symbol() const;
-
+        Player(char symbol, const char *name);
+        char get_symbol() const;
+        const char *get_name() const;
+    };
 
 };
-
-Player create_player(const std::string& name, const std::string& symbol);
