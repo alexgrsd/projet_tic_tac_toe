@@ -1,6 +1,7 @@
 #pragma once
 
-namespace board{
+namespace board // représente le plateau de jeu
+{
     struct Board{
         private:
             char grid[3][3];

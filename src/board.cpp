@@ -1,6 +1,6 @@
 #include "board.hpp"
 
-namespace board
+namespace board // représente le plateau de jeu
 {
     Board::Board()
     {
