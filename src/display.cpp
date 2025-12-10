@@ -27,7 +27,7 @@ namespace display // gere l'IHM du jeu
     }
 
     player::Player show_player_creation(int player_number) // affiche le menu de création d'un joueur et retourne le joueur créé
-    {
+    { // FLAG: à améliorer, pas de vérification des entrées utilisateur on peut mettre des symboles invalides / rentrer le même symbole - nom pour les 2 joueurs
         terminal_ctrl::clear_screen();
         terminal_ctrl::set_title("IMACtoe - Create Player " + std::to_string(player_number));
         std::cout << game_name_ascii << std::endl;
