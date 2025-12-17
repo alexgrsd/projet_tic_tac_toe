@@ -58,4 +58,24 @@ namespace display // gere l'IHM du jeu
         return player;
     }
 
+    void draw_game_board(std::string board_str) // affiche le plateau de jeu a partir d'une chaîne de caractères, ex: "X O X   O  "
+    {
+        terminal_ctrl::clear_screen();
+        terminal_ctrl::set_title("IMACtoe - Game Board");
+        std::cout << game_name_ascii << std::endl;
+        std::cout << "  0   1   2 " << std::endl;
+        for (int i = 0; i < 3; ++i)
+        {
+            std::cout << i << " ";
+            for (int j = 0; j < 3; ++j)
+            {
+                std::cout << " " << board_str[i * 3 + j] << " ";
+                if (j < 2) std::cout << "|";    
+                
+            }
+            if (i < 2) std::cout << "\n  ---+---+---\n";
+        }
+        std::cout << std::endl;
+    }
+
 } // namespace display

@@ -11,5 +11,6 @@ namespace display // fonctions d'affichage
     void show_welcome_message();
     int show_game_mode_selection();
     player::Player show_player_creation(int player_number);
+    void draw_game_board(std::string board_str);
 
 } // namespace display
