@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "board.hpp"
 
 namespace player
 {
@@ -15,6 +16,7 @@ namespace player
         char get_symbol() const;
         const std::string &get_name() const;
         bool get_is_human() const;
+        void play_bot_move(board::Board& board); 
     };
 
     Player create_bot();

@@ -16,6 +16,7 @@ namespace game_tic_tac_toe // contient la logique du jeu
         Game();
         void play();
         void initialize_game( player::Player &p1, player::Player &p2);
+        void play_game( player::Player &p1, player::Player &p2, board::Board &board); 
         const player::Player &get_player(int player_number) const;
     };
 
