@@ -12,6 +12,11 @@ namespace board // représente le plateau de jeu
         return grid[row][col];
     }
 
+    std::array<std::array<char, 3>, 3> Board::get_grid() const
+    {
+        return grid;
+    }
+
     bool Board::set_cell(int row, int col, char symbol)
     {
         if (grid[row][col] == ' ')
@@ -65,6 +70,19 @@ namespace board // représente le plateau de jeu
             return grid[0][2];
 
         return ' '; // personne gagne (rip)
+    }
+
+    std::string Board::to_string() const // retourne une représentation en chaîne de caractères du plateau
+    {
+        std::string board_str;
+        for (int i = 0; i < 3; ++i)
+        {
+            for (int j = 0; j < 3; ++j)
+            {
+                board_str += grid[i][j];
+            }
+        }
+        return board_str;
     }
     
 } // namespace board
