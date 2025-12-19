@@ -9,7 +9,7 @@ namespace display // gere l'IHM du jeu
         std::cout << game_name_ascii << std::endl;
         std::cout << "Welcome to IMACtoe" << std::endl;
         std::cout << "Press Enter to start the game..." << std::endl;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin.ignore(255, '\n');
     }
 
     int show_game_mode_selection() // affiche le menu de sélection du mode de jeu
@@ -51,7 +51,7 @@ namespace display // gere l'IHM du jeu
             } else {
                 std::cout << "Invalid symbol. Please enter a single character." << std::endl;
                 std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cin.ignore(255, '\n');
             }
         }
         player::Player player(symbol, name, true);
@@ -76,6 +76,30 @@ namespace display // gere l'IHM du jeu
             if (i < 2) std::cout << "\n  ---+---+---\n";
         }
         std::cout << std::endl;
+    }
+
+    int choose_difficulty_level()
+    {
+        terminal_ctrl::clear_screen();
+        terminal_ctrl::set_title("IMACtoe - Select Difficulty Level");
+        std::cout << game_name_ascii << std::endl;
+        std::cout << "Select Difficulty Level for Computer:" << std::endl;
+        std::cout << "1. Easy" << std::endl;
+        std::cout << "2. Medium" << std::endl;
+        std::cout << "3. Hard" << std::endl;
+        std::cout << "Enter your choice (1, 2 or 3): ";
+        int choice;
+        while (true) {
+            std::cin >> choice;
+            if (choice >= 1 && choice <= 3) {
+                break; // valid choice
+            } else {
+                std::cout << "Invalid choice. Please enter 1, 2 or 3: ";
+                std::cin.clear();
+                std::cin.ignore(255, '\n');
+            }
+        }
+        return choice;
     }
 
 } // namespace display

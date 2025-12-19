@@ -12,5 +12,6 @@ namespace display // fonctions d'affichage
     int show_game_mode_selection();
     player::Player show_player_creation(int player_number);
     void draw_game_board(std::string board_str);
+    int choose_difficulty_level();
 
 } // namespace display

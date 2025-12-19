@@ -35,6 +35,14 @@ namespace game_tic_tac_toe // contient la logique du jeu
         {
             std::cout << "Enter row and column (0, 1, or 2) separated by space: ";
             std::cin >> row >> col;
+            // Validate input
+            if (row < 0 || row > 2 || col < 0 || col > 2)
+            {
+                std::cout << "Invalid input. Row and column must be between 0 and 2." << std::endl;
+                std::cin.clear();
+                std::cin.ignore(255, '\n');
+                continue;
+            }
             if (game_board.set_cell(row, col, current_player.get_symbol()))
             {
                 break;
@@ -42,7 +50,7 @@ namespace game_tic_tac_toe // contient la logique du jeu
             else
             {
                 std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cin.ignore(255, '\n');
                 std::cout << "Invalid move. Try again." << std::endl;
             }
         }
@@ -65,7 +73,9 @@ namespace game_tic_tac_toe // contient la logique du jeu
             {
                 std::cout << "Player vs Computer mode selected." << std::endl;
                 p1 = display::show_player_creation(1);
-                p2 = player::create_bot();
+                int difficulty_choice;
+                difficulty_choice = display::choose_difficulty_level();
+                p2 = player::create_bot(difficulty_choice);
                 break;
             }
             else
@@ -73,7 +83,7 @@ namespace game_tic_tac_toe // contient la logique du jeu
                 std::cout << "Invalid choice. Please select again." << std::endl;
                 std::cin.clear();
                 std::cout << "Press Enter to continue..." << std::endl;
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cin.ignore(255, '\n');
                 std::cin.get();
                 continue;
             }
@@ -96,7 +106,19 @@ namespace game_tic_tac_toe // contient la logique du jeu
             }
             else
             {
-                current_player->play_bot_move(board);
+                int difficulty = current_player->get_difficulty_level();
+                if (difficulty == 1)
+                {
+                    current_player->play_bot_move_easy(board);
+                }
+                else if (difficulty == 2)
+                {
+                    current_player->play_bot_move_medium(board, p1);
+                }
+                else if (difficulty == 3)
+                {
+                    current_player->play_bot_move_hard(board, p1);
+                }
             }
 
             char winner = board.check_winner();
@@ -118,5 +140,6 @@ namespace game_tic_tac_toe // contient la logique du jeu
             }
         }
     }
+}
 
-} // namespace game_tic_tac_toe
+// namespace game_tic_tac_toe
