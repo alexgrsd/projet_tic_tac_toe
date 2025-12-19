@@ -47,12 +47,12 @@ namespace player
 
         for (size_t i = 0; i < size; i++)
         {
-            for (size_t j = 0; j < size; j++)
+            for (size_t j = 0; j < size; j++) // on itere sur chaque case
             {
                 if (temp_board.get_cell(i, j) == ' ')
-                { // case vide
+                { 
                     temp_board.set_cell(i, j, symbol);
-                    if (temp_board.check_winner() == symbol)
+                    if (temp_board.check_winner() == symbol) // si la case est vide on check si un coup la ferait gagner
                     {
                         row = i;
                         col = j;
