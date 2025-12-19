@@ -1,16 +1,35 @@
 #pragma once
 #include <string>
+#include "board.hpp"
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
 
-struct Player{
+namespace player
+{
+
+    struct Player
+    {
     private:
-    std::string name;
-    std::string symbol;
-
+        char symbol;
+        std::string name;
+        bool is_human;
+        int difficulty_level;
     public:
-    std::string get_name() const;
-    std::string get_symbol() const;
+        Player(char symbol, const std::string &name, bool is_human);
+        Player(char symbol, const std::string &name, bool is_human, int difficulty_level);
+        int get_difficulty_level() const;
+        char get_symbol() const;
+        const std::string &get_name() const;
+        bool get_is_human() const;
+        void play_bot_move_easy(board::Board &board);
+        void play_bot_move_medium(board::Board &board, Player const &human); // bloquera juste une victoire imminente de l'adversaire
+        void play_bot_move_hard(board::Board &board, Player const &human); // sera normalement "imbattable" (on y croit)
+    };
+
+    Player create_bot(int &difficulty_level);
+
+} // namespace player
 
 
-};
 
-Player create_player(const std::string& name, const std::string& symbol);
