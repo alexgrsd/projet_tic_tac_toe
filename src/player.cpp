@@ -1,6 +1,4 @@
 #include "player.hpp"
-#include "display.hpp"
-
 namespace player
 {
 
