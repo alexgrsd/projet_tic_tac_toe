@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once
 #include <string>
 
 // déclarations de chaines de strings utilisées pour pas polluer le code principal

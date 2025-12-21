@@ -2,8 +2,9 @@
 #include "game.hpp"
 #include <iostream>
 
-int main() {
-    
+int main()
+{
+
     game_tic_tac_toe::Game game;
     game.play();
 

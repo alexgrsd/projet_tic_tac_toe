@@ -39,7 +39,7 @@ namespace board // représente le plateau de jeu
                 }
             }
         }
-        return true; // le plateau est plein 
+        return true; // le plateau est plein
     } // peut être inutile, a voir si je check pas le nombre de tour directement dans le main
 
     void Board::reset() // pour vider le plateau avant une partie
@@ -84,5 +84,5 @@ namespace board // représente le plateau de jeu
         }
         return board_str;
     }
-    
+
 } // namespace board
