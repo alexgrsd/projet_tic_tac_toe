@@ -65,17 +65,18 @@ namespace game_tic_tac_toe // contient la logique du jeu
             if (choice == 1)
             { // PvP
                 std::cout << "Player vs Player mode selected." << std::endl;
-                p1 = display::show_player_creation(1);
-                p2 = display::show_player_creation(2);
+                p1 = display::show_player_creation(1, p2);
+                p2 = display::show_player_creation(2, p1);
                 break;
             }
             else if (choice == 2)
             {
                 std::cout << "Player vs Computer mode selected." << std::endl;
-                p1 = display::show_player_creation(1);
                 int difficulty_choice;
                 difficulty_choice = display::choose_difficulty_level();
-                p2 = player::create_bot(difficulty_choice);
+                p1 = player::create_bot(difficulty_choice);
+                p2 = display::show_player_creation(2, p1);
+
                 break;
             }
             else
@@ -107,17 +108,19 @@ namespace game_tic_tac_toe // contient la logique du jeu
             else
             {
                 int difficulty = current_player->get_difficulty_level();
-                if (difficulty == 1)
+                switch (difficulty)
                 {
+                case 1:
                     current_player->play_bot_move_easy(board);
-                }
-                else if (difficulty == 2)
-                {
+                    break;
+                case 2:
                     current_player->play_bot_move_medium(board, p1);
-                }
-                else if (difficulty == 3)
-                {
+                    break;
+                case 3:
                     current_player->play_bot_move_hard(board, p1);
+                    break;
+                default:
+                    break;
                 }
             }
 
