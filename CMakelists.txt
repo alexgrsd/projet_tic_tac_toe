@@ -27,7 +27,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 # Set the folder where the executable is created
 set_target_properties(${PROJECT_NAME} PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE})
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 # Add all the source files
 file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS src/*)
